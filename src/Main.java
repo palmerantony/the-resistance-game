@@ -1,4 +1,5 @@
-import java.io.Console;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -7,10 +8,10 @@ public class Main {
     public static void main(String[] args) {
 
         // Accept player names
-
         acceptPlayerNames();
 
         // Randomly select players to be spies, when commanded
+        selectSpies();
 
         // Inform spies who the other spies are
 
@@ -22,6 +23,7 @@ public class Main {
 
 
     }
+
 
     private static void acceptPlayerNames() {
         Scanner in = new Scanner(System.in);
@@ -42,5 +44,21 @@ public class Main {
 
         System.out.println("Thank you for entering player names. The following players are in the game:");
         GameData.PLAYER_NAMES.forEach(System.out::println);
+        System.out.println();
     }
+
+
+
+    private static void selectSpies() {
+        System.out.println("***********");
+        System.out.println("Selecting spies");
+
+        //Shuffle the list and select three players
+        Collections.shuffle(GameData.PLAYER_NAMES);
+        List<String> spies = GameData.PLAYER_NAMES.subList(0, 3);
+        GameData.SPIES  = spies;
+    }
+
+
+
 }
