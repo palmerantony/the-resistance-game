@@ -1,8 +1,14 @@
+import java.io.Console;
+import java.util.Scanner;
+
 public class Main {
+
 
     public static void main(String[] args) {
 
         // Accept player names
+
+        acceptPlayerNames();
 
         // Randomly select players to be spies, when commanded
 
@@ -14,6 +20,27 @@ public class Main {
 
         // Repeat for N rounds
 
-        System.out.println("Hello World!");
+
+    }
+
+    private static void acceptPlayerNames() {
+        Scanner in = new Scanner(System.in);
+
+        boolean done = false;
+        do {
+            System.out.println("Please enter player name or X to finish: ");
+            String playerName = in.next();
+            if (playerName.equals("X")) {
+                done = true;
+                System.out.println("All done!");
+            } else {
+                GameData.PLAYER_NAMES.add(playerName);
+                System.out.println(playerName + " has been added to the game!");
+                System.out.println();
+            }
+        } while (!done);
+
+        System.out.println("Thank you for entering player names. The following players are in the game:");
+        GameData.PLAYER_NAMES.forEach(System.out::println);
     }
 }
