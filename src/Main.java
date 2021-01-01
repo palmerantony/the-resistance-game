@@ -17,6 +17,8 @@ public class Main {
 
         // Inform spies who the other spies are
         informSpies();
+
+
         // Permit voting for Round 1
 
         // Announce votes for Round 1
@@ -87,7 +89,7 @@ public class Main {
             result.informPlayer();
             System.out.println();
         } while(true);
-
+        System.out.println("***********");
     }
 
 
