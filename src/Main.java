@@ -23,11 +23,7 @@ public class Main {
         setOrderOfPlay();
 
         // Permit voting for Round 1
-        System.out.println("Time to select a team for mission 1!");
-        printThinkingDots();
-        System.out.println("When you are ready to submit mission success/failure, please enter 'X': ");
-        printThinkingDots();
-        in.next();
+        runMissionOne();
 
 
         // Announce votes for Round 1
@@ -35,6 +31,40 @@ public class Main {
         // Repeat for N rounds
 
 
+    }
+
+    private static void runMissionOne() throws InterruptedException {
+        System.out.println("Time to select a team for mission 1!");
+        printThinkingDots();
+        System.out.println("When you are ready to submit mission success/failure, please enter 'X': ");
+        printThinkingDots();
+        in.next();
+        System.out.println("Mission 1 requires two participants");
+        Mission mission = new Mission(2,2);
+        System.out.println("Please enter first SUCCESS or FAIL");
+        String missionResult1 = in.next();
+        recordMissionResultInput(mission, missionResult1);
+        System.out.println("Please enter second SUCCESS or FAIL");
+        String missionResult2 = in.next();
+        recordMissionResultInput(mission, missionResult2);
+
+        assessMissionStatus(mission);
+    }
+
+    private static void assessMissionStatus(Mission mission) {
+        if (mission.hasMissionSucceeded()) {
+            System.out.println("Congratulations, RESISTANCE. Your mission has succeeded with [" + mission.getNumberOfRecordedFailures() + "] failure votes");
+        } else {
+            System.out.println("Disaster has struck! The mission has failed with [" + mission.getNumberOfRecordedFailures() + "] failure votes");
+        }
+    }
+
+    private static void recordMissionResultInput(Mission mission, String missionResult) {
+        if ("SUCCESS".equals(missionResult.toUpperCase())) {
+            mission.addSuccess();
+        } else if ("FAIL".equals(missionResult.toUpperCase())) {
+            mission.addFailure();
+        }
     }
 
     private static void setOrderOfPlay() throws InterruptedException {
